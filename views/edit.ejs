@@ -1,0 +1,37 @@
+<%- include('header.ejs') %>
+<main class="mw">
+  <h2>THE BLOG</h2>
+  <h3>블로그 글 작성</h3>
+  <form
+    action="/update"
+    method="post"
+    class="writecon"
+    enctype="multipart/form-data"
+  >
+    <input type="hidden" name="id" value="<%= post._id %>" />
+    <label for="title">제목</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="제목을 입력해주세요"
+      value="<%= post.title %>"
+    />
+    <label for="postimg">이미지첨부</label>
+    <input type="file" id="postimg" name="postimg" />
+    <label for="content">내용</label>
+    <textarea name="content" id="content" placeholder="내용을 입력해 주세요">
+<%= post.content %></textarea
+    >
+    <label for="createAtDate">작성일</label>
+    <input
+      type="date"
+      id="createAtDate"
+      name="createAtDate"
+      value="<%= post.createAtDate %>"
+    />
+    <button type="submit">수정 완료</button>
+  </form>
+</main>
+
+<%- include('footer.ejs') %>

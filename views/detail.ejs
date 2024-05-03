@@ -1,0 +1,39 @@
+<%- include('header.ejs') %>
+<main class="mw">
+  <h2>THE BLOG</h2>
+  <h3>상세페이지</h3>
+  <p>
+    <span class="user">작성자</span> /
+    <span class="createDate"><%= post.createAtDate %></span>
+  </p>
+  <!-- <img src="<%= post.postImgPath %>" alt="Post Image" /> -->
+  <img src="<%= post.postImg %>" alt="Post Image" />
+  <h4 class="title"><%= post.title %></h4>
+  <p class="desc"><%= post.content %></p>
+
+  <button class="delBtn" data-postnum="<%= post._id %>">삭제하기</button>
+  <a href="/edit/<%= post._id %>">수정하기</a>
+  <a href="/">목록으로이동</a>
+</main>
+
+<script>
+  const deleteBtn = document.querySelector('.delBtn');
+  deleteBtn.addEventListener('click', (e) => {
+    fetch('/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        postNum: e.target.dataset.postnum,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        location.href = '/';
+      } else {
+        console.log('삭제실패');
+      }
+    });
+  });
+</script>
+<%- include('footer.ejs') %>
